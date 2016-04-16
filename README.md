@@ -43,4 +43,4 @@ Se pide:
 . Definir la firma (el tipo) de todas las funciones usadas, creando abstracciones necesarias para incrementar la expresividad.
 . Escribir un ejemplo de consulta por cada punto
 
-[Archivo adjunto] https://docs.google.com/document/d/1FXjydoNPwzCOQyrF6-qxL3yXhzX-WsGQNbh6sOvPHqQ/edit
+[Archivo adjunto] (https://docs.google.com/document/d/1FXjydoNPwzCOQyrF6-qxL3yXhzX-WsGQNbh6sOvPHqQ)
