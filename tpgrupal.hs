@@ -28,3 +28,20 @@ extensionhs file = (intersect  ".hs" (nombre file)) == ".hs" --en revision
 renombrararchivo :: Archivo -> String -> Archivo
 renombrararchivo (Archivo a b) name = Archivo name b
 --Agregar una nueva línea al archivo
+agregarlinea :: Archivo -> Int -> String -> Archivo
+agregarlinea file numero linea = 
+--Quitar una línea del archivo
+quitarlinea :: Archivo -> Int -> Archivo
+quitarlinea file numero = 
+--Reemplazar una línea del archivo por otra
+reemplazarlinea :: Archivo -> Int -> String -> Archivo
+reemplazarlinea file numero linea = 
+--Buscar y reemplazar en el archivo
+buscarreemplazar :: Archivo -> String -> Archivo
+buscarreemplazar file palabra = 
+--Wrappear las líneas del archivo
+wrappeararchivo :: Archivo -> Archivo
+wrappeararchivo file = 
+--Saber si una modificación es inútil
+esnecesario :: Archivo -> String -> Bool
+esnecesario file content =
