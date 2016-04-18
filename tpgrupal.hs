@@ -29,19 +29,19 @@ renombrararchivo :: Archivo -> String -> Archivo
 renombrararchivo (Archivo a b) name = Archivo name b
 --Agregar una nueva línea al archivo
 agregarlinea :: Archivo -> Int -> String -> Archivo
-agregarlinea file numero linea = 
+agregarlinea file numero linea = Archivo (nombre file) (unlines ((take numero (lines (contenido file))) ++ [linea] ++ (drop numero (lines (contenido file)))))
 --Quitar una línea del archivo
 quitarlinea :: Archivo -> Int -> Archivo
-quitarlinea file numero = 
+quitarlinea file numero = Archivo (nombre file) (unlines ((take ((-) numero 1) (lines (contenido file)))  ++ (drop numero (lines (contenido file)))))
 --Reemplazar una línea del archivo por otra
 reemplazarlinea :: Archivo -> Int -> String -> Archivo
-reemplazarlinea file numero linea = 
+reemplazarlinea file numero linea = Archivo (nombre file) (unlines ((take ((-) numero 1) (lines (contenido file))) ++ [linea] ++ (drop numero (lines (contenido file)))))
 --Buscar y reemplazar en el archivo
 buscarreemplazar :: Archivo -> String -> Archivo
-buscarreemplazar file palabra = 
+buscarreemplazar file palabra = Archivo "" ""
 --Wrappear las líneas del archivo
 wrappeararchivo :: Archivo -> Archivo
-wrappeararchivo file = 
+wrappeararchivo file = Archivo "" ""
 --Saber si una modificación es inútil
 esnecesario :: Archivo -> String -> Bool
-esnecesario file content =
+esnecesario file content = True
