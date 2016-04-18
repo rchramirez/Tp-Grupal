@@ -4,20 +4,25 @@ import Data.List
 data Archivo = Archivo { nombre :: String, contenido :: String } deriving (Show, Eq)
 -- ejemplo
 unTpGrupal :: Archivo
-unTpGrupal = Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n                  \n aaa    "
+unTpGrupal = Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n"
 
-cadena = contenido unTpGrupal
-lista1 = words cadena
-
-extension = nombre unTpGrupal
---Para ejecutar :l nombrearchivo
+--Para ejecutar :l tpgrupal
 --tamaño de un archivo en bytes
-tamanio n = (*) (length n) 8
+tamanio :: Archivo -> Int
+tamanio (Archivo name content) = (*8) (length content)
 --archivo está vacío
-esvacio e = null e
+esvacio :: Archivo -> Bool
+esvacio (Archivo name content) = null content
 --cantidad de líneas de un archivo
-cantlineas c = length (lines c)
+cantidadlineas :: Archivo -> Int
+cantidadlineas (Archivo name content) = length (lines content)
 --líneas del archivo es blanca
-lineablanca l1 = any (\x -> null x) l1 --en revision
+lineablanca :: Archivo -> Bool
+lineablanca (Archivo name content) = any (\x -> all (isSpace) x) (lines content)
 --archivo es de extensión .hs
-extensionhs e = (intersect  ".hs" e) == ".hs"
+extensionhs :: Archivo -> Bool
+extensionhs (Archivo name content) = (intersect  ".hs" name) == ".hs" --en revision
+--Renombrar un archivo
+renombrararchivo :: Archivo -> String -> Archivo
+renombrararchivo (Archivo a b) name = Archivo name b
+--Agregar una nueva línea al archivo
