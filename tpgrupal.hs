@@ -5,23 +5,25 @@ data Archivo = Archivo { nombre :: String, contenido :: String } deriving (Show,
 -- ejemplo
 unTpGrupal :: Archivo
 unTpGrupal = Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n"
+testFile :: Archivo
+testFile = Archivo "tesths" "inicio... \n           \n...fin"
 
 --Para ejecutar :l tpgrupal
 --tamaño de un archivo en bytes
 tamanio :: Archivo -> Int
-tamanio (Archivo name content) = (*8) (length content)
+tamanio file = (*8) (length (contenido file))
 --archivo está vacío
 esvacio :: Archivo -> Bool
-esvacio (Archivo name content) = null content
+esvacio file = null (contenido file)
 --cantidad de líneas de un archivo
 cantidadlineas :: Archivo -> Int
-cantidadlineas (Archivo name content) = length (lines content)
+cantidadlineas file = length (lines (contenido file))
 --líneas del archivo es blanca
 lineablanca :: Archivo -> Bool
-lineablanca (Archivo name content) = any (\x -> all (isSpace) x) (lines content)
+lineablanca file = any (\x -> all (isSpace) x) (lines (contenido file))
 --archivo es de extensión .hs
 extensionhs :: Archivo -> Bool
-extensionhs (Archivo name content) = (intersect  ".hs" name) == ".hs" --en revision
+extensionhs file = (intersect  ".hs" (nombre file)) == ".hs" --en revision
 --Renombrar un archivo
 renombrararchivo :: Archivo -> String -> Archivo
 renombrararchivo (Archivo a b) name = Archivo name b
