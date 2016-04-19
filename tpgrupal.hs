@@ -6,7 +6,7 @@ data Archivo = Archivo { nombre :: String, contenido :: String } deriving (Show,
 unTpGrupal :: Archivo
 unTpGrupal = Archivo "tpGrupal.hs" "listaLarga :: [a] -> Bool \n listaLarga = (>9) . length \n"
 testFile :: Archivo
-testFile = Archivo "tesths" "inicio... \n           \n...fin"
+testFile = Archivo "tesths" " palabra inicio ... palabra\n           \n... fin"
 
 --Para ejecutar :l tpgrupal
 --tamaño de un archivo en bytes
@@ -37,11 +37,12 @@ quitarlinea file numero = Archivo (nombre file) (unlines ((take ((-) numero 1) (
 reemplazarlinea :: Archivo -> Int -> String -> Archivo
 reemplazarlinea file numero linea = Archivo (nombre file) (unlines ((take ((-) numero 1) (lines (contenido file))) ++ [linea] ++ (drop numero (lines (contenido file)))))
 --Buscar y reemplazar en el archivo
-buscarreemplazar :: Archivo -> String -> Archivo
-buscarreemplazar file palabra = Archivo "" ""
+buscarreemplazar :: Archivo -> String -> String -> Archivo
+buscarreemplazar file palabra nueva = Archivo (nombre file) (unlines (map (\x -> if (all (isSpace) x) then x else unwords (map (\x -> if x == palabra then nueva else x) (words x))) (lines (contenido file))))
 --Wrappear las líneas del archivo
 wrappeararchivo :: Archivo -> Archivo
-wrappeararchivo file = Archivo "" ""
+wrappeararchivo file = Archivo "" "" --map (\n x -> if (length x) < 80 then x else ) (lines (contenido file))
 --Saber si una modificación es inútil
-esnecesario :: Archivo -> String -> Bool
-esnecesario file content = True
+esnecesario :: Archivo -> String -> String
+esnecesario file content | (contenido file) == content = "Es una modificacion inutil"
+						 | otherwise = "Modificacion necesaria"
