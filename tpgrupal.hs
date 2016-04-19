@@ -41,8 +41,13 @@ buscarreemplazar :: Archivo -> String -> String -> Archivo
 buscarreemplazar file palabra nueva = Archivo (nombre file) (unlines (map (\x -> if (all (isSpace) x) then x else unwords (map (\x -> if x == palabra then nueva else x) (words x))) (lines (contenido file))))
 --Wrappear las líneas del archivo
 wrappeararchivo :: Archivo -> Archivo
-wrappeararchivo file = Archivo "" "" --map (\n x -> if (length x) < 80 then x else ) (lines (contenido file))
+wrappeararchivo file = Archivo (nombre file) (unlines (wrappear' (lines (contenido file))))
+
+wrappear' :: [String] -> [String]
+wrappear' [] = []
+wrappear' (x:l1) = [take 79 x] ++ wrappear' l1 --no concatena el resto de la linea
+--wrappear' (x:l1) = [take 79 x] ++ wrappear' ((\c l2 -> [c ++ head l2] ++ tail l2) x l1) --en revision
+
 --Saber si una modificación es inútil
 esnecesario :: Archivo -> String -> String
-esnecesario file content | (contenido file) == content = "Es una modificacion inutil"
-						 | otherwise = "Modificacion necesaria"
+esnecesario file content = if (contenido file) == content then "Es una modificacion inutil" else "Modificacion necesaria"
