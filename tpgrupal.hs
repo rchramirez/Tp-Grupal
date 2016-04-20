@@ -45,8 +45,10 @@ wrappeararchivo file = Archivo (nombre file) (unlines (wrappear' (lines (conteni
 
 wrappear' :: [String] -> [String]
 wrappear' [] = []
-wrappear' (x:l1) = [take 79 x] ++ wrappear' l1 --no concatena el resto de la linea
---wrappear' (x:l1) = [take 79 x] ++ wrappear' ((\c l2 -> [c ++ head l2] ++ tail l2) x l1) --en revision
+wrappear' (linea:restolinea) = cortarlinea linea ++ wrappear' restolinea
+cortarlinea :: [Char] -> [Char]
+cortarlinea '' = ''
+cortarlinea linea = take 79 linea ++ cortarlinea (drop 79 linea) 
 
 --Saber si una modificación es inútil
 esnecesario :: Archivo -> String -> String
